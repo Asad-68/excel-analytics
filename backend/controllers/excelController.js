@@ -19,3 +19,11 @@ exports.analyzeExcel = (req, res, next) => {
     next(err);
   }
 };
+const Record = require('../models/Record');
+
+// ...after parsing Excel data into `data` array
+
+// Example: Save all rows to MongoDB
+Record.insertMany(data)
+  .then(() => res.json({ success: true, rowCount: data.length }))
+  .catch(err => next(err));
